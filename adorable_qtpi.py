@@ -3,7 +3,7 @@ import json
 import requests
 import os
 
-LOCAWOOD_TOKEN = os.environ["LOCAWOOD_TOKEN"]
+LOCALWOOD_TOKEN = os.environ["LOCALWOOD_TOKEN"]
 MQTT_HOST = os.environ["MQTT_HOST"]
 MQTT_USERNAME = os.environ["MQTT_USERNAME"]
 MQTT_TOPIC = os.environ["MQTT_TOPIC"]
@@ -27,7 +27,7 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     print('Got message %s', msg.payload)
     localwood_payload = json.loads(msg.payload.decode('utf-8'))
-    localwood_payload['token'] = LOCAWOOD_TOKEN
+    localwood_payload['token'] = LOCALWOOD_TOKEN
 
     try:
         requests.post('http://localhost:8080/sockets', data = localwood_payload)
